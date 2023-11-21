@@ -2,24 +2,25 @@ const HttpError = require('./http-error');
 
 const {pool} = require('../utils/postgres-helper');
 
-class Classes {
+class PartyTypes {
   find = async () => {
     try {
-      const allClasses = await pool.query('SELECT * FROM classes');
-      return allClasses.rows;
+      const allPartyTypes = await pool.query('SELECT * FROM party_types');
+      return allPartyTypes.rows;
     } catch (e) {
       console.log(e);
       const error = new HttpError('Something went wrong', 500);
       throw error;
     }
   };
-  findGroupAndIndividualClasses = async ids => {
+
+  findById = async id => {
     try {
-      const allGroupClasses = await pool.query(
-        'SELECT * FROM classes WHERE class_id = ANY($1)',
-        [ids],
+      const partyType = await pool.query(
+        'SELECT * FROM party_types WHERE type_id = $1',
+        [id],
       );
-      return allGroupClasses.rows;
+      return partyType.rows[0].type_name;
     } catch (e) {
       console.log(e);
       const error = new HttpError('Something went wrong', 500);
@@ -28,4 +29,4 @@ class Classes {
   };
 }
 
-module.exports = Classes;
+module.exports = PartyTypes;
