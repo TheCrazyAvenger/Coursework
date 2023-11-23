@@ -17,11 +17,11 @@ class ClassSchedule {
     }
   };
 
-  getUserClassesByIds = async ids => {
+  getUserClassesByIds = async (ids, classesIds) => {
     try {
       const classes = await pool.query(
-        'SELECT * FROM classes WHERE class_id = ANY($1)',
-        [ids],
+        'SELECT * FROM classes WHERE class_id = ANY($1) AND class_id = ANY($2)',
+        [ids, classesIds],
       );
       return classes.rows;
     } catch (e) {

@@ -19,11 +19,12 @@ const getUserPartyParticipants = async (_, res, next) => {
 const getUserPartiesByIds = async (req, res, next) => {
   let classShcedule;
 
-  const {ids} = req.body;
+  const {ids, partiesIds} = req.body;
 
   try {
     classShcedule = await PartyParticipantsDbController.getUserPartiesByIds(
       ids,
+      partiesIds,
     );
   } catch (e) {
     return next(e);

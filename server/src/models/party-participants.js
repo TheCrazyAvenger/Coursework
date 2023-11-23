@@ -17,11 +17,11 @@ class PartyParticipants {
     }
   };
 
-  getUserPartiesByIds = async ids => {
+  getUserPartiesByIds = async (ids, parties) => {
     try {
       const partyParticipants = await pool.query(
-        'SELECT * FROM dance_parties WHERE party_id = ANY($1)',
-        [ids],
+        'SELECT * FROM dance_parties WHERE party_id = ANY($1) AND party_id = ANY($2)',
+        [ids, parties],
       );
       return partyParticipants.rows;
     } catch (e) {

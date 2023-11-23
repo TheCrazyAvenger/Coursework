@@ -1,23 +1,31 @@
 import {useGetGroupClassesQuery, useGetIndividualClassesQuery} from '@/api';
 import {useGetPartiesQuery} from '@/api/parties';
 import {
+  useGetUserClassScheduleIdsQuery,
+  useGetUserPartyParticipantsIdsQuery,
+} from '@/api/schedule';
+import {
+  Header,
   HomeAd,
-  HomeHeader,
   HomeItemContainer,
   HomePartyItemContainer,
   ScreenContainer,
+  Spinner,
 } from '@/components';
 import {selectGroupClasses, selectIndividualClasses} from '@/store/selectors';
 import {selectParties} from '@/store/selectors/parties';
 import {IGroupClasses, IIndividualClasses, IParties} from '@/store/types';
 import React from 'react';
 import {ScrollView, View} from 'react-native';
-import {ActivityIndicator, useTheme} from 'react-native-paper';
+import {useTheme} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 import {styles} from './styles';
 
 export const HomeScreen = () => {
   const {colors} = useTheme();
+
+  useGetUserClassScheduleIdsQuery({});
+  useGetUserPartyParticipantsIdsQuery({});
 
   const {isLoading: individualClassesLoading} = useGetIndividualClassesQuery(
     {},
@@ -32,7 +40,7 @@ export const HomeScreen = () => {
   const parties: IParties[] = useSelector(selectParties);
   // console.log(individualClasses);
   if (groupClassesLoading || individualClassesLoading || partiesLoading) {
-    return <ActivityIndicator />;
+    return <Spinner />;
   }
 
   return (
@@ -40,7 +48,11 @@ export const HomeScreen = () => {
       <ScrollView
         contentContainerStyle={styles.container}
         style={{backgroundColor: colors.primary}}>
-        <HomeHeader />
+        <Header
+          title="Приветствуем,"
+          description="FirstName LastName"
+          pv={48}
+        />
         <View style={[styles.content, {backgroundColor: colors.background}]}>
           <HomeAd />
           <HomeItemContainer

@@ -18,10 +18,13 @@ const getUserClassSchedule = async (_, res, next) => {
 const getUserClassesByIds = async (req, res, next) => {
   let classes;
 
-  const {ids} = req.body;
+  const {ids, classesIds} = req.body;
 
   try {
-    classes = await ClassScheduleDbController.getUserClassesByIds(ids);
+    classes = await ClassScheduleDbController.getUserClassesByIds(
+      ids,
+      classesIds,
+    );
   } catch (e) {
     return next(e);
   }

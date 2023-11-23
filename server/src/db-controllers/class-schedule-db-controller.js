@@ -1,9 +1,11 @@
 const HttpError = require('../models/http-error');
 const ClassSchedule = require('../models/class-schedule');
+const ClassTypes = require('../models/class-types');
 
 class ClassScheduleDbController {
   constructor() {
     this.classScheduleModel = new ClassSchedule();
+    this.classTypes = new ClassTypes();
   }
 
   getUserClassSchedule = async id => {
@@ -19,11 +21,28 @@ class ClassScheduleDbController {
     return classShcedule.map(item => item.class_id);
   };
 
-  getUserClassesByIds = async ids => {
+  getUserClassesByIds = async (ids, classesIds) => {
     let classes;
 
     try {
-      classes = await this.classScheduleModel.getUserClassesByIds(ids);
+      classes = await this.classScheduleModel.getUserClassesByIds(
+        ids,
+        classesIds,
+      );
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+
+    try {
+      await Promise.all(
+        classes.map(async item => {
+          const typeId = await this.classTypes.findById(item.type_id);
+          item.type_id = typeId;
+
+          return item;
+        }),
+      );
     } catch (e) {
       const error = new HttpError('Something went wrong.', 500);
       throw error;

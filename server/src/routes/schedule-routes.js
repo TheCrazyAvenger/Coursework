@@ -11,9 +11,9 @@ const {
 
 const router = new express.Router();
 
-router.get('/shcedule&type=classes', getUserClassSchedule);
-router.get('/shcedule&type=parties', getUserPartyParticipants);
-router.get('/user-schedules&type=classes', getUserClassesByIds);
-router.get('/user-schedules&type=parties', getUserPartiesByIds);
+router.post('/shcedule&type=classes', getUserClassSchedule);
+router.post('/shcedule&type=parties', getUserPartyParticipants);
+router.post('/user-schedules&type=classes', getUserClassesByIds);
+router.post('/user-schedules&type=parties', getUserPartiesByIds);
 
 module.exports = router;
