@@ -6,12 +6,14 @@ const IndividualClasses = require('../models/individual-classes');
 const {
   getIndividualClassesIds,
 } = require('../controllers/individual-classes-controller');
+const ClassTypes = require('../models/class-types');
 
 class ClassesDbController {
   constructor() {
     this.classesModel = new Classes();
     this.groupClassesModel = new GroupClasses();
     this.individualClassesModel = new IndividualClasses();
+    this.classTypes = new ClassTypes();
   }
 
   getClasses = async () => {
@@ -56,6 +58,20 @@ class ClassesDbController {
       throw error;
     }
 
+    try {
+      await Promise.all(
+        classes.map(async item => {
+          const typeId = await this.classTypes.findById(item.type_id);
+          item.type_id = typeId;
+
+          return item;
+        }),
+      );
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+
     return classes;
   };
 
@@ -84,6 +100,20 @@ class ClassesDbController {
       classes = await this.classesModel.findGroupAndIndividualClasses(ids);
     } catch (e) {
       console.log(e);
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+
+    try {
+      await Promise.all(
+        classes.map(async item => {
+          const typeId = await this.classTypes.findById(item.type_id);
+          item.type_id = typeId;
+
+          return item;
+        }),
+      );
+    } catch (e) {
       const error = new HttpError('Something went wrong.', 500);
       throw error;
     }

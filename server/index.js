@@ -8,6 +8,7 @@ const studentsRoutes = require('./src/routes/students-routes');
 const classesRoutes = require('./src/routes/classes-routes');
 const partiesRoutes = require('./src/routes/parties-routes');
 const instructorsRoutes = require('./src/routes/instructors-routes');
+const scheduleRoutes = require('./src/routes/schedule-routes');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use('/api/v1', studentsRoutes);
 app.use('/api/v1', classesRoutes);
 app.use('/api/v1', partiesRoutes);
 app.use('/api/v1', instructorsRoutes);
+app.use('/api/v1', scheduleRoutes);
 
 app.use(() => {
   throw new HttpError('Could not find this route.', 404);
