@@ -3,6 +3,8 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {HomeStack} from './HomeStackNavigator';
+import {InstructorsStack} from './InstructorsStackNavigator';
+import {ProfileStack} from './ProfileStackNavigator';
 import {ScheduleStack} from './ScheduleStackNavigator';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -34,6 +36,22 @@ export const BottomTabs = () => {
           tabBarIcon: props => tabBarIcon({name: 'book', ...props}),
         }}
         component={ScheduleStack}
+      />
+      <Tab.Screen
+        name={Stacks.instructors}
+        options={{
+          title: 'Инструкторы',
+          tabBarIcon: props => tabBarIcon({name: 'face', ...props}),
+        }}
+        component={InstructorsStack}
+      />
+      <Tab.Screen
+        name={Stacks.profile}
+        options={{
+          title: 'Профиль',
+          tabBarIcon: props => tabBarIcon({name: 'person', ...props}),
+        }}
+        component={ProfileStack}
       />
     </Tab.Navigator>
   );

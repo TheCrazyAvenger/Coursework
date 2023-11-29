@@ -18,6 +18,32 @@ class StudentsDbController {
 
     return students;
   };
+
+  getStudentById = async id => {
+    let student;
+
+    try {
+      student = await this.studentsModel.findById(id);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+
+    return student;
+  };
+
+  removeStudentClassSchedule = async id => {
+    let student;
+
+    try {
+      student = await this.studentsModel.findById(id);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+
+    return student;
+  };
 }
 
 const studentsDbController = new StudentsDbController();

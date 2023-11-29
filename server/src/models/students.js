@@ -13,6 +13,19 @@ class Students {
       throw error;
     }
   };
+  findById = async id => {
+    try {
+      const student = await pool.query(
+        'SELECT * FROM students WHERE student_id = $1',
+        [id],
+      );
+      return student.rows[0];
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong', 500);
+      throw error;
+    }
+  };
 }
 
 module.exports = Students;

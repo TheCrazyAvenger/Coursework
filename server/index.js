@@ -9,6 +9,7 @@ const classesRoutes = require('./src/routes/classes-routes');
 const partiesRoutes = require('./src/routes/parties-routes');
 const instructorsRoutes = require('./src/routes/instructors-routes');
 const scheduleRoutes = require('./src/routes/schedule-routes');
+const userRoutes = require('./src/routes/user-routes');
 
 const app = express();
 
@@ -33,10 +34,18 @@ app.use('/api/v1', classesRoutes);
 app.use('/api/v1', partiesRoutes);
 app.use('/api/v1', instructorsRoutes);
 app.use('/api/v1', scheduleRoutes);
+app.use('/api/v1', userRoutes);
 
 app.use(() => {
   throw new HttpError('Could not find this route.', 404);
 });
+
+// console.log(
+//   (async () => {
+//     const has = await bcryptjs.hash('qwerty', 12);
+//     console.log(has);
+//   })(),
+// );
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listening on port ${process.env.PORT}`);

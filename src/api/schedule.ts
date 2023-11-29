@@ -23,6 +23,7 @@ export const scheduleApi = createApi({
       onQueryStarted: async (_: any, {dispatch, queryFulfilled}) => {
         try {
           const {data} = await queryFulfilled;
+          console.log('getUserClassScheduleIds', data);
           dispatch(setClassesScheduleIds(data.data));
         } catch (err) {
           console.log(err);
@@ -93,6 +94,20 @@ export const scheduleApi = createApi({
         }
       },
     }),
+    removeStudentClassSchedule: build.mutation<any, any>({
+      query: data => ({
+        url: '/user-schedules/remove&type=classes',
+        method: 'DELETE',
+        body: data,
+      }),
+    }),
+    addStudentClassSchedule: build.mutation<any, any>({
+      query: data => ({
+        url: '/user-schedules/add&type=classes',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -102,4 +117,6 @@ export const {
   useGetUserIndividualClassScheduleQuery,
   useGetUserGroupClassScheduleQuery,
   useGetUserPartiesClassScheduleQuery,
+  useRemoveStudentClassScheduleMutation,
+  useAddStudentClassScheduleMutation,
 } = scheduleApi;

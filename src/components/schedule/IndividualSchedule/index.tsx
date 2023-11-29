@@ -37,7 +37,6 @@ export const IndividualSchedule = () => {
 
   return (
     <FlatList
-      horizontal
       data={individualClassesSchedule}
       keyExtractor={keyExtractor}
       renderItem={renderItem}

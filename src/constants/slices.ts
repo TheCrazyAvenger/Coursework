@@ -3,4 +3,6 @@ export enum Slices {
   classes = 'classes',
   parties = 'parties',
   schedule = 'schedule',
+  user = 'user',
+  instructors = 'instructors',
 }

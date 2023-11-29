@@ -35,7 +35,6 @@ export const PartySchedule = () => {
 
   return (
     <FlatList
-      horizontal
       data={partiesSchedule}
       keyExtractor={keyExtractor}
       renderItem={renderItem}

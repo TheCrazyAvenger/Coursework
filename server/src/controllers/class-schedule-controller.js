@@ -35,4 +35,39 @@ const getUserClassesByIds = async (req, res, next) => {
   });
 };
 
-module.exports = {getUserClassSchedule, getUserClassesByIds};
+const addStudentClassSchedule = async (req, res, next) => {
+  const {studentId, classId} = req.body;
+
+  try {
+    ClassScheduleDbController.addStudentClassSchedule(studentId, classId);
+  } catch (e) {
+    return next(e);
+  }
+
+  res.status(200).json({
+    status: 200,
+    data: [{message: 'Successfull'}],
+  });
+};
+
+const removeStudentClassSchedule = async (req, res, next) => {
+  const {studentId, classId} = req.body;
+
+  try {
+    ClassScheduleDbController.removeStudentClassSchedule(studentId, classId);
+  } catch (e) {
+    return next(e);
+  }
+
+  res.status(200).json({
+    status: 200,
+    data: [{message: 'Successfull'}],
+  });
+};
+
+module.exports = {
+  removeStudentClassSchedule,
+  getUserClassSchedule,
+  getUserClassesByIds,
+  addStudentClassSchedule,
+};

@@ -35,7 +35,6 @@ export const GroupSchedule = () => {
 
   return (
     <FlatList
-      horizontal
       data={groupClassesSchedule}
       keyExtractor={keyExtractor}
       renderItem={renderItem}

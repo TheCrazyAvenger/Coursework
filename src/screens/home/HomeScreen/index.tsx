@@ -1,4 +1,5 @@
 import {useGetGroupClassesQuery, useGetIndividualClassesQuery} from '@/api';
+import {useGetInstructorsApiQuery} from '@/api/instructors';
 import {useGetPartiesQuery} from '@/api/parties';
 import {
   useGetUserClassScheduleIdsQuery,
@@ -27,6 +28,7 @@ export const HomeScreen = () => {
   useGetUserClassScheduleIdsQuery({});
   useGetUserPartyParticipantsIdsQuery({});
 
+  const {isLoading: isLoadingInstructors} = useGetInstructorsApiQuery({});
   const {isLoading: individualClassesLoading} = useGetIndividualClassesQuery(
     {},
   );
@@ -39,7 +41,12 @@ export const HomeScreen = () => {
   const groupClasses: IGroupClasses[] = useSelector(selectGroupClasses);
   const parties: IParties[] = useSelector(selectParties);
   // console.log(individualClasses);
-  if (groupClassesLoading || individualClassesLoading || partiesLoading) {
+  if (
+    groupClassesLoading ||
+    individualClassesLoading ||
+    partiesLoading ||
+    isLoadingInstructors
+  ) {
     return <Spinner />;
   }
 

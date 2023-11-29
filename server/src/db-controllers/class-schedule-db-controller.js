@@ -50,6 +50,27 @@ class ClassScheduleDbController {
 
     return classes;
   };
+
+  addStudentClassSchedule = async (studentId, classId) => {
+    try {
+      await this.classScheduleModel.addStudentClassSchedule(studentId, classId);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
+
+  removeStudentClassSchedule = async (studentId, classId) => {
+    try {
+      await this.classScheduleModel.removeStudentClassSchedule(
+        studentId,
+        classId,
+      );
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
 }
 
 const classScheduleDbController = new ClassScheduleDbController();
