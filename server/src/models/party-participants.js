@@ -30,6 +30,34 @@ class PartyParticipants {
       throw error;
     }
   };
+
+  addStudentPartySchedule = async (studentId, partyId) => {
+    try {
+      await pool.query(
+        `INSERT INTO party_participants (student_id, party_id)
+         VALUES
+          ($1, $2)`,
+        [studentId, partyId],
+      );
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong', 500);
+      throw error;
+    }
+  };
+
+  removeStudentPartySchedule = async (studentId, partyId) => {
+    try {
+      await pool.query(
+        'DELETE FROM party_participants WHERE student_id = $1 AND party_id = $2',
+        [studentId, partyId],
+      );
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong', 500);
+      throw error;
+    }
+  };
 }
 
 module.exports = PartyParticipants;

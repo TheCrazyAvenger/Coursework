@@ -120,6 +120,19 @@ class ClassesDbController {
 
     return classes;
   };
+
+  getClassById = async id => {
+    let instructor;
+
+    try {
+      instructor = await this.classesModel.findById(id);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+
+    return instructor;
+  };
 }
 
 const classesDbController = new ClassesDbController();

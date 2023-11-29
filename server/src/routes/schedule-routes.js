@@ -9,6 +9,8 @@ const {
 const {
   getUserPartyParticipants,
   getUserPartiesByIds,
+  removeStudentPartySchedule,
+  addStudentPartySchedule,
 } = require('../controllers/party-participants-controller');
 
 const router = new express.Router();
@@ -23,5 +25,11 @@ router.delete(
   removeStudentClassSchedule,
 );
 router.post('/user-schedules/add&type=classes', addStudentClassSchedule);
+
+router.delete(
+  '/user-schedules/remove&type=parties',
+  removeStudentPartySchedule,
+);
+router.post('/user-schedules/add&type=parties', addStudentPartySchedule);
 
 module.exports = router;

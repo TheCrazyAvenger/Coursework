@@ -34,6 +34,19 @@ class GroupClassesDbController {
 
     return parties;
   };
+
+  getPartyById = async id => {
+    let party;
+
+    try {
+      party = await this.partiesModel.findById(id);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+
+    return party;
+  };
 }
 
 const groupClassesDbController = new GroupClassesDbController();

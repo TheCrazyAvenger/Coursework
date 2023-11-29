@@ -22,7 +22,15 @@ export const instructorsApi = createApi({
         }
       },
     }),
+    getInstructor: build.query<any, any>({
+      keepUnusedDataFor: 0,
+      query: id => ({
+        url: `/instructors/${id}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const {useGetInstructorsApiQuery} = instructorsApi;
+export const {useGetInstructorsApiQuery, useGetInstructorQuery} =
+  instructorsApi;

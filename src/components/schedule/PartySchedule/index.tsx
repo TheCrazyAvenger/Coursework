@@ -1,4 +1,5 @@
 import {useGetUserPartiesClassScheduleQuery} from '@/api/schedule';
+import {EmptyData} from '@/components/common/EmptyData';
 import {Spinner} from '@/components/common/Spinner';
 import {HomePartyItemContainerItem} from '@/components/home/HomePartyItemContainer/HomePartyItemContainerItem';
 import {selectParties} from '@/store/selectors/parties';
@@ -33,7 +34,7 @@ export const PartySchedule = () => {
     return <Spinner absolute />;
   }
 
-  return (
+  return partiesSchedule?.length > 0 ? (
     <FlatList
       data={partiesSchedule}
       keyExtractor={keyExtractor}
@@ -41,5 +42,7 @@ export const PartySchedule = () => {
       contentContainerStyle={styles.container}
       showsHorizontalScrollIndicator={false}
     />
+  ) : (
+    <EmptyData />
   );
 };

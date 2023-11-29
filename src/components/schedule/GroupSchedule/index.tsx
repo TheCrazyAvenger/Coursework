@@ -1,4 +1,5 @@
 import {useGetUserGroupClassScheduleQuery} from '@/api/schedule';
+import {EmptyData} from '@/components/common/EmptyData';
 import {Spinner} from '@/components/common/Spinner';
 import {HomeItemContainerItem} from '@/components/home/HomeItemContainer/HomeItemContainerItem';
 import {selectGroupClasses} from '@/store/selectors';
@@ -33,7 +34,7 @@ export const GroupSchedule = () => {
     return <Spinner absolute />;
   }
 
-  return (
+  return groupClassesSchedule?.length > 0 ? (
     <FlatList
       data={groupClassesSchedule}
       keyExtractor={keyExtractor}
@@ -41,5 +42,7 @@ export const GroupSchedule = () => {
       contentContainerStyle={styles.container}
       showsHorizontalScrollIndicator={false}
     />
+  ) : (
+    <EmptyData />
   );
 };

@@ -51,6 +51,30 @@ class PatyPaticipantsDbController {
 
     return parties;
   };
+
+  addStudentPartySchedule = async (studentId, partyId) => {
+    try {
+      await this.partyParticipantsModel.addStudentPartySchedule(
+        studentId,
+        partyId,
+      );
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
+
+  removeStudentPartySchedule = async (studentId, partyId) => {
+    try {
+      await this.partyParticipantsModel.removeStudentPartySchedule(
+        studentId,
+        partyId,
+      );
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
 }
 
 const patyPaticipantsDbController = new PatyPaticipantsDbController();

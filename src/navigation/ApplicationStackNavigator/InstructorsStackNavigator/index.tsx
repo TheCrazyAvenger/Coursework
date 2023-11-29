@@ -1,5 +1,5 @@
 import {noHeaderScreenOption, Screens} from '@/constants';
-import {InstructorsScreen} from '@/screens';
+import {InstructorScreen, InstructorsScreen} from '@/screens';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 
@@ -12,6 +12,11 @@ export const InstructorsStack = () => {
         options={noHeaderScreenOption}
         name={Screens.instructors}
         component={InstructorsScreen}
+      />
+      <Stack.Screen
+        options={{title: 'Инструктор'}}
+        name={Screens.instructor}
+        component={InstructorScreen}
       />
     </Stack.Navigator>
   );

@@ -18,6 +18,19 @@ class InstructorsDbController {
 
     return instructors;
   };
+
+  getInstructorById = async id => {
+    let instructor;
+
+    try {
+      instructor = await this.insctructorsModel.findById(id);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+
+    return instructor;
+  };
 }
 
 const instructorsDbController = new InstructorsDbController();

@@ -13,7 +13,11 @@ import {
   ScreenContainer,
   Spinner,
 } from '@/components';
-import {selectGroupClasses, selectIndividualClasses} from '@/store/selectors';
+import {
+  selectGroupClasses,
+  selectIndividualClasses,
+  selectStudent,
+} from '@/store/selectors';
 import {selectParties} from '@/store/selectors/parties';
 import {IGroupClasses, IIndividualClasses, IParties} from '@/store/types';
 import React from 'react';
@@ -38,6 +42,7 @@ export const HomeScreen = () => {
   const individualClasses: IIndividualClasses[] = useSelector(
     selectIndividualClasses,
   );
+  const student = useSelector(selectStudent);
   const groupClasses: IGroupClasses[] = useSelector(selectGroupClasses);
   const parties: IParties[] = useSelector(selectParties);
   // console.log(individualClasses);
@@ -57,7 +62,7 @@ export const HomeScreen = () => {
         style={{backgroundColor: colors.primary}}>
         <Header
           title="Приветствуем,"
-          description="FirstName LastName"
+          description={`${student?.first_name} ${student?.last_name}`}
           pv={48}
         />
         <View style={[styles.content, {backgroundColor: colors.background}]}>

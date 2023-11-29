@@ -1,4 +1,5 @@
 import {useGetUserIndividualClassScheduleQuery} from '@/api/schedule';
+import {EmptyData} from '@/components/common/EmptyData';
 import {Spinner} from '@/components/common/Spinner';
 import {HomeItemContainerItem} from '@/components/home/HomeItemContainer/HomeItemContainerItem';
 import {selectIndividualClasses} from '@/store/selectors';
@@ -35,7 +36,7 @@ export const IndividualSchedule = () => {
     return <Spinner absolute />;
   }
 
-  return (
+  return individualClassesSchedule?.length > 0 ? (
     <FlatList
       data={individualClassesSchedule}
       keyExtractor={keyExtractor}
@@ -43,5 +44,7 @@ export const IndividualSchedule = () => {
       contentContainerStyle={styles.container}
       showsHorizontalScrollIndicator={false}
     />
+  ) : (
+    <EmptyData />
   );
 };

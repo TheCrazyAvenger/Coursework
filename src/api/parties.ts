@@ -22,7 +22,14 @@ export const partiesApi = createApi({
         }
       },
     }),
+    getParty: build.query<any, any>({
+      keepUnusedDataFor: 0,
+      query: id => ({
+        url: `/parties/${id}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const {useGetPartiesQuery} = partiesApi;
+export const {useGetPartiesQuery, useGetPartyQuery} = partiesApi;

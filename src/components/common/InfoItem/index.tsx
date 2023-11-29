@@ -13,7 +13,7 @@ export const InfoItem = ({title, description}: Props) => {
       <Typography variant="titleMedium" color={colors.primary}>
         {title}
       </Typography>
-      <Typography variant="headlineSmall">{description}</Typography>
+      <Typography variant="bodyLarge">{description}</Typography>
     </View>
   );
 };

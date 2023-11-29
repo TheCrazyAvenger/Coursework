@@ -5,8 +5,10 @@ import {
   useRemoveStudentClassScheduleMutation,
 } from '@/api/schedule';
 import {Typography} from '@/components';
+import {Screens} from '@/constants';
 import {selectStudent} from '@/store/selectors';
 import {selectClassesScheduleIds} from '@/store/selectors/schedule';
+import {useNavigation} from '@react-navigation/native';
 import React, {useMemo, useState} from 'react';
 import {Button, Card} from 'react-native-paper';
 import {useSelector} from 'react-redux';
@@ -16,6 +18,7 @@ import {styles} from './styles';
 export const HomeItemContainerItem = ({item, style}: Props) => {
   const selectedClasses = useSelector(selectClassesScheduleIds);
   const student = useSelector(selectStudent);
+  const navigation = useNavigation<any>();
 
   const {refetch: refetchIds} = useGetUserClassScheduleIdsQuery({});
   const {refetch: refetchClasses} = useGetIndividualClassesQuery({});
@@ -70,8 +73,12 @@ export const HomeItemContainerItem = ({item, style}: Props) => {
     }
   };
 
+  const goToClass = () => {
+    navigation.navigate(Screens.class, {id: item.class_id});
+  };
+
   return (
-    <Card style={[styles.container, style]}>
+    <Card style={[styles.container, style]} onPress={goToClass}>
       <Card.Content>
         <Typography variant="headlineMedium">{item.class_name}</Typography>
         <Typography variant="bodyLarge" mb={6}>

@@ -36,4 +36,42 @@ const getUserPartiesByIds = async (req, res, next) => {
   });
 };
 
-module.exports = {getUserPartyParticipants, getUserPartiesByIds};
+const addStudentPartySchedule = async (req, res, next) => {
+  const {studentId, partyId} = req.body;
+
+  try {
+    PartyParticipantsDbController.addStudentPartySchedule(studentId, partyId);
+  } catch (e) {
+    return next(e);
+  }
+
+  res.status(200).json({
+    status: 200,
+    data: [{message: 'Successfull'}],
+  });
+};
+
+const removeStudentPartySchedule = async (req, res, next) => {
+  const {studentId, partyId} = req.body;
+
+  try {
+    PartyParticipantsDbController.removeStudentPartySchedule(
+      studentId,
+      partyId,
+    );
+  } catch (e) {
+    return next(e);
+  }
+
+  res.status(200).json({
+    status: 200,
+    data: [{message: 'Successfull'}],
+  });
+};
+
+module.exports = {
+  getUserPartyParticipants,
+  getUserPartiesByIds,
+  addStudentPartySchedule,
+  removeStudentPartySchedule,
+};

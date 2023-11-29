@@ -1,5 +1,5 @@
 import {noHeaderScreenOption, Screens} from '@/constants';
-import {HomeScreen} from '@/screens';
+import {ClassScreen, HomeScreen, PartyScreen} from '@/screens';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 
@@ -12,6 +12,16 @@ export const HomeStack = () => {
         options={noHeaderScreenOption}
         name={Screens.homeScreen}
         component={HomeScreen}
+      />
+      <Stack.Screen
+        options={{title: 'Занятие'}}
+        name={Screens.class}
+        component={ClassScreen}
+      />
+      <Stack.Screen
+        options={{title: 'Вечеринка'}}
+        name={Screens.party}
+        component={PartyScreen}
       />
     </Stack.Navigator>
   );

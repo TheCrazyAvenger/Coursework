@@ -40,6 +40,7 @@ export const scheduleApi = createApi({
       onQueryStarted: async (_: any, {dispatch, queryFulfilled}) => {
         try {
           const {data} = await queryFulfilled;
+          console.log('getUserPartyScheduleIds', data);
           dispatch(setPartiesScheduleIds(data.data));
         } catch (err) {
           console.log(err);
@@ -108,6 +109,20 @@ export const scheduleApi = createApi({
         body: data,
       }),
     }),
+    removeStudentPartySchedule: build.mutation<any, any>({
+      query: data => ({
+        url: '/user-schedules/remove&type=parties',
+        method: 'DELETE',
+        body: data,
+      }),
+    }),
+    addStudentPartySchedule: build.mutation<any, any>({
+      query: data => ({
+        url: '/user-schedules/add&type=parties',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -119,4 +134,6 @@ export const {
   useGetUserPartiesClassScheduleQuery,
   useRemoveStudentClassScheduleMutation,
   useAddStudentClassScheduleMutation,
+  useAddStudentPartyScheduleMutation,
+  useRemoveStudentPartyScheduleMutation,
 } = scheduleApi;

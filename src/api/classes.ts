@@ -37,8 +37,18 @@ export const classesApi = createApi({
         }
       },
     }),
+    getClass: build.query<any, any>({
+      keepUnusedDataFor: 0,
+      query: id => ({
+        url: `/classes/${id}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const {useGetIndividualClassesQuery, useGetGroupClassesQuery} =
-  classesApi;
+export const {
+  useGetIndividualClassesQuery,
+  useGetGroupClassesQuery,
+  useGetClassQuery,
+} = classesApi;
