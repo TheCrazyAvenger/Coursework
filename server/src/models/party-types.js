@@ -13,7 +13,29 @@ class PartyTypes {
       throw error;
     }
   };
-
+  add = async typeName => {
+    try {
+      await pool.query(
+        `INSERT INTO party_types (Type_Name)
+         VALUES
+          ($1)`,
+        [typeName],
+      );
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong', 500);
+      throw error;
+    }
+  };
+  removeById = async id => {
+    try {
+      await pool.query('DELETE FROM party_types WHERE type_id = $1', [id]);
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong', 500);
+      throw error;
+    }
+  };
   findById = async id => {
     try {
       const partyType = await pool.query(

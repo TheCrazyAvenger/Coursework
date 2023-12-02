@@ -23,6 +23,15 @@ class InstructorForPartiesDbController {
       throw error;
     }
   };
+
+  removeById = async id => {
+    try {
+      await this.instructorForPartiesModel.removeById(id);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
 }
 
 const instructorForPartiesDbController = new InstructorForPartiesDbController();

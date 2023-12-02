@@ -20,9 +20,6 @@ export const HomeItemContainer = ({title, data}: Props) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Typography variant="titleLarge">{title}</Typography>
-        <Typography variant="titleMedium" color={colors.primary}>
-          Все
-        </Typography>
       </View>
       <FlatList
         horizontal
