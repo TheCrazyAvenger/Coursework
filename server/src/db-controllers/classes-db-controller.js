@@ -29,6 +29,41 @@ class ClassesDbController {
     return classes;
   };
 
+  addClass = async classData => {
+    let classes;
+
+    try {
+      classes = await this.classesModel.add(classData);
+      return classes;
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
+
+  updateClass = async classData => {
+    try {
+      await this.classesModel.update(classData);
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
+
+  removeClass = async classId => {
+    let classes;
+
+    try {
+      classes = await this.classesModel.remove(classId);
+      return classes;
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
+
   getGroupClasses = async () => {
     let groupClasses;
 
@@ -61,6 +96,8 @@ class ClassesDbController {
     try {
       await Promise.all(
         classes.map(async item => {
+          const pureTypeId = item.type_id;
+          item.pure_type_id = pureTypeId;
           const typeId = await this.classTypes.findById(item.type_id);
           item.type_id = typeId;
 
@@ -107,6 +144,8 @@ class ClassesDbController {
     try {
       await Promise.all(
         classes.map(async item => {
+          const pureTypeId = item.type_id;
+          item.pure_type_id = pureTypeId;
           const typeId = await this.classTypes.findById(item.type_id);
           item.type_id = typeId;
 

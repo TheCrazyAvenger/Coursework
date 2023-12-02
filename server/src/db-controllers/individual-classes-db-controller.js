@@ -18,6 +18,24 @@ class IndividualClassesDbController {
 
     return individualClasses;
   };
+
+  addIndividualClass = async classId => {
+    try {
+      await this.individualClassesModel.add(classId);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
+
+  removeIndividualClass = async classId => {
+    try {
+      await this.individualClassesModel.remove(classId);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
 }
 
 const individualClassesDbController = new IndividualClassesDbController();

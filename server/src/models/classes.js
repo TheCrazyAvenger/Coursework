@@ -26,7 +26,55 @@ class Classes {
       throw error;
     }
   };
+  add = async classData => {
+    let classes;
+    const {class_name, day_of_week, start_time, end_time, type_id} = classData;
 
+    try {
+      classes = await pool.query(
+        `INSERT INTO classes (class_name, day_of_week, start_time, end_time, type_id)
+         VALUES
+          ($1, $2, $3, $4, $5)
+          RETURNING class_id`,
+        [class_name, day_of_week, start_time, end_time, type_id],
+      );
+      return classes.rows[0].class_id;
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong', 500);
+      throw error;
+    }
+  };
+  remove = async classId => {
+    let classes;
+
+    try {
+      classes = await pool.query(
+        'DELETE FROM classes WHERE class_id = $1 RETURNING class_id',
+        [classId],
+      );
+      return classes.rows[0].class_id;
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong', 500);
+      throw error;
+    }
+  };
+  update = async classData => {
+    const {class_name, day_of_week, start_time, end_time, type_id, class_id} =
+      classData;
+
+    try {
+      await pool.query(
+        'UPDATE classes SET class_name = $1, day_of_week = $2, start_time = $3, end_time = $4, type_id = $5 WHERE class_id = $6',
+        [class_name, day_of_week, start_time, end_time, type_id, class_id],
+      );
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong', 500);
+      throw error;
+    }
+  };
   findById = async id => {
     try {
       const classes = await pool.query(

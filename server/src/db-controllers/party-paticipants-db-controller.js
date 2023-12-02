@@ -75,6 +75,15 @@ class PatyPaticipantsDbController {
       throw error;
     }
   };
+
+  removePartySchedule = async partyId => {
+    try {
+      await this.partyParticipantsModel.removePartySchedule(partyId);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
 }
 
 const patyPaticipantsDbController = new PatyPaticipantsDbController();

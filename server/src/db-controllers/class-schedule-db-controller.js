@@ -71,6 +71,14 @@ class ClassScheduleDbController {
       throw error;
     }
   };
+  removeClassSchedule = async classId => {
+    try {
+      await this.classScheduleModel.removeClassSchedule(classId);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
 }
 
 const classScheduleDbController = new ClassScheduleDbController();

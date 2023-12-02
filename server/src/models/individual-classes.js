@@ -15,6 +15,31 @@ class IndividualClasses {
       throw error;
     }
   };
+  add = async classId => {
+    try {
+      await pool.query(
+        `INSERT INTO individual_classes (class_id)
+         VALUES
+          ($1)`,
+        [classId],
+      );
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong', 500);
+      throw error;
+    }
+  };
+  remove = async classId => {
+    try {
+      await pool.query('DELETE FROM individual_classes WHERE class_id = $1', [
+        classId,
+      ]);
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong', 500);
+      throw error;
+    }
+  };
 }
 
 module.exports = IndividualClasses;

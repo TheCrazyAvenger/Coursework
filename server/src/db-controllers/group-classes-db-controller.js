@@ -18,6 +18,24 @@ class GroupClassesDbController {
 
     return groupClasses;
   };
+
+  addGroupClass = async (classId, maxStudents) => {
+    try {
+      await this.groupClassesModel.add(classId, maxStudents);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
+
+  removeClass = async classId => {
+    try {
+      await this.groupClassesModel.remove(classId);
+    } catch (e) {
+      const error = new HttpError('Something went wrong.', 500);
+      throw error;
+    }
+  };
 }
 
 const groupClassesDbController = new GroupClassesDbController();

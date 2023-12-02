@@ -58,6 +58,18 @@ class PartyParticipants {
       throw error;
     }
   };
+
+  removePartySchedule = async partyId => {
+    try {
+      await pool.query('DELETE FROM party_participants WHERE party_id = $1', [
+        partyId,
+      ]);
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong', 500);
+      throw error;
+    }
+  };
 }
 
 module.exports = PartyParticipants;

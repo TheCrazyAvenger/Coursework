@@ -46,13 +46,23 @@ class ClassSchedule {
       throw error;
     }
   };
-
   removeStudentClassSchedule = async (studentId, classId) => {
     try {
       await pool.query(
         'DELETE FROM class_schedule WHERE student_id = $1 AND class_id = $2',
         [studentId, classId],
       );
+    } catch (e) {
+      console.log(e);
+      const error = new HttpError('Something went wrong', 500);
+      throw error;
+    }
+  };
+  removeClassSchedule = async classId => {
+    try {
+      await pool.query('DELETE FROM class_schedule WHERE class_id = $1', [
+        classId,
+      ]);
     } catch (e) {
       console.log(e);
       const error = new HttpError('Something went wrong', 500);
