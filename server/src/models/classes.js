@@ -5,7 +5,7 @@ const {pool} = require('../utils/postgres-helper');
 class Classes {
   find = async () => {
     try {
-      const allClasses = await pool.query('SELECT * FROM classes');
+      const allClasses = await pool.query('SELECT * FROM classes SORT');
       return allClasses.rows;
     } catch (e) {
       console.log(e);
@@ -13,10 +13,15 @@ class Classes {
       throw error;
     }
   };
-  findGroupAndIndividualClasses = async ids => {
+  findGroupAndIndividualClasses = async (ids, sort) => {
+    console.log(
+      'SELECT * FROM classes WHERE class_id = ANY($1)' +
+        (sort ? ` ${sort}` : ''),
+    );
     try {
       const allGroupClasses = await pool.query(
-        'SELECT * FROM classes WHERE class_id = ANY($1)',
+        'SELECT * FROM classes WHERE class_id = ANY($1)' +
+          (sort ? ` ${sort}` : ''),
         [ids],
       );
       return allGroupClasses.rows;

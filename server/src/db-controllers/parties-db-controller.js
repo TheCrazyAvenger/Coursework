@@ -8,11 +8,11 @@ class GroupClassesDbController {
     this.partyTypesModel = new PartyTypes();
   }
 
-  getParties = async () => {
+  getParties = async sort => {
     let parties;
 
     try {
-      parties = await this.partiesModel.find();
+      parties = await this.partiesModel.find(sort);
     } catch (e) {
       const error = new HttpError('Something went wrong.', 500);
       throw error;

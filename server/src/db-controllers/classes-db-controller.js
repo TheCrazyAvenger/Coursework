@@ -64,7 +64,7 @@ class ClassesDbController {
     }
   };
 
-  getGroupClasses = async () => {
+  getGroupClasses = async sort => {
     let groupClasses;
 
     try {
@@ -86,7 +86,10 @@ class ClassesDbController {
     let classes;
 
     try {
-      classes = await this.classesModel.findGroupAndIndividualClasses(ids);
+      classes = await this.classesModel.findGroupAndIndividualClasses(
+        ids,
+        sort,
+      );
     } catch (e) {
       console.log(e);
       const error = new HttpError('Something went wrong.', 500);
@@ -112,7 +115,7 @@ class ClassesDbController {
     return classes;
   };
 
-  getIndividualClasses = async () => {
+  getIndividualClasses = async sort => {
     let individualClasses;
 
     try {
@@ -134,7 +137,10 @@ class ClassesDbController {
     let classes;
 
     try {
-      classes = await this.classesModel.findGroupAndIndividualClasses(ids);
+      classes = await this.classesModel.findGroupAndIndividualClasses(
+        ids,
+        sort,
+      );
     } catch (e) {
       console.log(e);
       const error = new HttpError('Something went wrong.', 500);

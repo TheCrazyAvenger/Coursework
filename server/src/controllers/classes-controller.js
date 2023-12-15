@@ -19,11 +19,13 @@ const getClasses = async (_, res, next) => {
   });
 };
 
-const getGroupClasses = async (_, res, next) => {
+const getGroupClasses = async (req, res, next) => {
   let classes;
 
+  const sort = req?.params?.sort;
+
   try {
-    classes = await ClassesDbController.getGroupClasses();
+    classes = await ClassesDbController.getGroupClasses(sort);
   } catch (e) {
     return next(e);
   }
@@ -34,11 +36,13 @@ const getGroupClasses = async (_, res, next) => {
   });
 };
 
-const getIndividualClasses = async (_, res, next) => {
+const getIndividualClasses = async (req, res, next) => {
   let classes;
 
+  const sort = req?.params?.sort;
+
   try {
-    classes = await ClassesDbController.getIndividualClasses();
+    classes = await ClassesDbController.getIndividualClasses(sort);
   } catch (e) {
     return next(e);
   }

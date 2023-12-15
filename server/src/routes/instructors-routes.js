@@ -14,6 +14,7 @@ const {
 const router = new express.Router();
 
 router.get('/instructors', getInstructors);
+router.get('/instructorss/:sort', getInstructors);
 router.get('/instructors/:id', getInstructorById);
 
 router.get('/instructors-schedule/:id', getInstructorScheduleById);

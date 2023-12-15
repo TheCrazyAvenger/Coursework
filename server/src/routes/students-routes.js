@@ -13,6 +13,7 @@ const {
 const router = new express.Router();
 
 router.get('/students', getStudents);
+router.get('/studentss/:sort', getStudents);
 
 router.get('/student-schedule&type=classes/:studentId', getStudentClasses);
 router.delete('/student-schedule&type=classes', removeStudentSchedule);

@@ -3,9 +3,11 @@ const HttpError = require('./http-error');
 const {pool} = require('../utils/postgres-helper');
 
 class Instructors {
-  find = async () => {
+  find = async sort => {
     try {
-      const allInstructors = await pool.query('SELECT * FROM instructors');
+      const allInstructors = await pool.query(
+        'SELECT * FROM instructors' + (sort ? ` ${sort}` : ''),
+      );
       return allInstructors.rows;
     } catch (e) {
       console.log(e);

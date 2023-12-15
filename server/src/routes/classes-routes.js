@@ -15,6 +15,8 @@ const router = new express.Router();
 router.get('/classes', getClasses);
 router.get('/classes&type=group', getGroupClasses);
 router.get('/classes&type=individual', getIndividualClasses);
+router.get('/classes&type=groups/:sort', getGroupClasses);
+router.get('/classes&type=individuals/:sort', getIndividualClasses);
 
 router.get('/classes/:id', getClassById);
 

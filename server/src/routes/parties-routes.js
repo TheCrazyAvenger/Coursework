@@ -11,6 +11,7 @@ const {
 const router = new express.Router();
 
 router.get('/parties', getParties);
+router.get('/partiess/:sort', getParties);
 router.get('/parties/:id', getPartyById);
 
 router.post('/parties', addParty);

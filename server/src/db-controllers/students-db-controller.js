@@ -6,11 +6,11 @@ class StudentsDbController {
     this.studentsModel = new Students();
   }
 
-  getStudents = async () => {
+  getStudents = async sort => {
     let students;
 
     try {
-      students = await this.studentsModel.find();
+      students = await this.studentsModel.find(sort);
     } catch (e) {
       const error = new HttpError('Something went wrong.', 500);
       throw error;

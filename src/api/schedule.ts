@@ -10,7 +10,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 export const scheduleApi = createApi({
   reducerPath: 'scheduleApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://10.0.2.2:3000/api/v1',
+    baseUrl: 'http://192.168.237.13:3000/api/v1',
   }),
   endpoints: build => ({
     getUserClassScheduleIds: build.query<any, any>({

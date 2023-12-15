@@ -14,6 +14,7 @@ import {scheduleReducer} from './slices/scheduleSlice';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  whitelist: [Slices.user],
 };
 
 const userPersistConfig = {

@@ -1,10 +1,12 @@
 const StudentsDbController = require('../db-controllers/students-db-controller');
 
-const getStudents = async (_, res, next) => {
+const getStudents = async (req, res, next) => {
   let students;
 
+  const sort = req?.params?.sort;
+
   try {
-    students = await StudentsDbController.getStudents();
+    students = await StudentsDbController.getStudents(sort);
   } catch (e) {
     return next(e);
   }

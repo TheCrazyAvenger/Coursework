@@ -2,11 +2,13 @@ const InstructorsDbController = require('../db-controllers/instructors-db-contro
 const InstructorForPartiesDbController = require('../db-controllers/instructors-for-parties-db-controller');
 const InstructorScheduleDbController = require('../db-controllers/instructor-schedule-db-controller');
 
-const getInstructors = async (_, res, next) => {
+const getInstructors = async (req, res, next) => {
   let instructors;
 
+  const sort = req?.params?.sort;
+
   try {
-    instructors = await InstructorsDbController.getInstructors();
+    instructors = await InstructorsDbController.getInstructors(sort);
   } catch (e) {
     return next(e);
   }

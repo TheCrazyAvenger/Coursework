@@ -2,11 +2,13 @@ const PartiesDbController = require('../db-controllers/parties-db-controller');
 const InstructorForPartiesDbController = require('../db-controllers/instructors-for-parties-db-controller');
 const PatyPaticipantsDbController = require('../db-controllers/party-paticipants-db-controller');
 
-const getParties = async (_, res, next) => {
+const getParties = async (req, res, next) => {
   let parties;
 
+  const sort = req?.params?.sort;
+
   try {
-    parties = await PartiesDbController.getParties();
+    parties = await PartiesDbController.getParties(sort);
   } catch (e) {
     return next(e);
   }
